@@ -36,9 +36,10 @@ fi
 
 # Itera a través de los archivos HTML, CSS y JS en el directorio actual y sus subdirectorios, excluyendo la carpeta "node_modules"
 find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | while read file; do
-  # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado
+  # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado, y la crea.
   rel_path=${file#./}
   min_path="minified/$rel_path"
+  mkdir -p $(dirname "$min_path")
 
   # Verifica si el archivo es un archivo HTML, CSS o JS
   case "$file" in
