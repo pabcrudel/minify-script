@@ -10,6 +10,8 @@
 clear
 echo
 
+echo Verificando instalacion de paquetes necesarios...
+echo
 # Lista de paquetes a verificar e instalar
 packages=("uglify-js" "clean-css-cli" "html-minifier")
 
@@ -24,21 +26,36 @@ do
   else
     echo "$package ya está instalado."
   fi
-  echo
 done
+echo
+echo
 
 # Verifica si el directorio "minified" existe, si es asi elimina su contenido, y si no crea el directorio.
-if [ ! -d minified ]; then
-    mkdir -p minified
-else
-    rm -r minified/*
-fi
+dir=minified
 
+echo Verificando estado del directorio $dir...
+echo
+if [ ! -d $dir ]; then
+  echo "No exite."
+  echo "Creando directorio $dir..."
+  mkdir -p $dir
+elif [ ! -z "$(ls -A $dir)" ]; then
+  echo "No esta vacio."
+  echo "Limpiando el contenido del directorio $dir..."
+  rm -r $dir/*
+else
+  echo "$dir esta vacio."
+fi
+echo
+echo
+
+echo "¡Proceso de minificación iniciado!"
+echo
 # Itera a través de los archivos HTML, CSS y JS en el directorio actual y sus subdirectorios, excluyendo la carpeta "node_modules"
 find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | while read file; do
   # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado, y la crea.
   rel_path=${file#./}
-  min_path="minified/$rel_path"
+  min_path="$dir/$rel_path"
   mkdir -p $(dirname "$min_path")
 
   # Muestra que archivo se esta minificando
@@ -47,7 +64,7 @@ find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' 
   # Verifica si el archivo es un archivo HTML, CSS o JS
   case "$file" in
     *.html)
-      # Minifica el archivo HTML y guarda el archivo minificado en el directorio "minified"
+      # Minifica el archivo HTML y guarda el archivo minificado en el directorio minified
       ./node_modules/.bin/html-minifier "$file" -o "$min_path" --collapse-whitespace --remove-comments
     ;;
     *.css)
