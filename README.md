@@ -63,7 +63,7 @@ Guarda la ubicacion del archivo original para almacenar el archivo minificado re
 # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado, y la crea.
 rel_path=${file#./}
 min_path="minified/$rel_path"
-  mkdir -p $(dirname "$min_path")
+mkdir -p $(dirname "$min_path")
 ```
 
 ### Archivos HTML
