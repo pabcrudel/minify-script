@@ -27,8 +27,7 @@ do
   echo
 done
 
-
-# Crea un directorio para los archivos minificados
+# Verifica si el directorio "minified" existe, si es asi elimina su contenido, y si no crea el directorio.
 if [ ! -d minified ]; then
     mkdir -p minified
 else
@@ -37,25 +36,27 @@ fi
 
 # Itera a través de los archivos HTML, CSS y JS en el directorio actual y sus subdirectorios, excluyendo la carpeta "node_modules"
 find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | while read file; do
-    # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado
-    rel_path=${file#./}
-    min_path="minified/$rel_path"
+  # Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado
+  rel_path=${file#./}
+  min_path="minified/$rel_path"
 
-    # Verifica si el archivo es un archivo HTML, CSS o JS
-    if [[ "$file" == *.html ]]
-    then
-        # Minifica el archivo HTML y guarda el archivo minificado en el directorio "minified"
-        ./node_modules/.bin/html-minifier "$file" -o "$min_path" --collapse-whitespace --remove-comments
-    elif [[ "$file" == *.css ]]
-    then
-        # Minifica el archivo CSS y guarda el archivo minificado en el directorio "minified"
-        ./node_modules/.bin/cleancss "$file" -o "$min_path" --compatibility "ie >= 11, Edge >= 12, Firefox >= 2, Chrome >= 4, Safari >= 3.1, Opera >= 15, iOS >= 3.2"
-    elif [[ "$file" == *.js ]]
-    then
-        mkdir -p $(dirname "$min_path")
-        # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
-        ./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle
-    fi
+  # Verifica si el archivo es un archivo HTML, CSS o JS
+  case "$file" in
+    *.html)
+      # Minifica el archivo HTML y guarda el archivo minificado en el directorio "minified"
+      ./node_modules/.bin/html-minifier "$file" -o "$min_path" --collapse-whitespace --remove-comments
+    ;;
+    *.css)
+      # Minifica el archivo CSS y guarda el archivo minificado en el directorio "minified"
+      ./node_modules/.bin/cleancss "$file" -o "$min_path" --compatibility "ie >= 11, Edge >= 12, Firefox >= 2, Chrome >= 4, Safari >= 3.1, Opera >= 15, iOS >= 3.2"
+    ;;
+    *.js)
+      mkdir -p $(dirname "$min_path")
+      # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
+      ./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle
+    ;;
+  esac
+
 done
 
 echo
