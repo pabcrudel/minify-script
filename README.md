@@ -60,9 +60,10 @@ find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' 
 Guarda la ubicacion del archivo original para almacenar el archivo minificado respetando el arbol de directorios original.
 
 ```sh
-# Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado
+# Obtiene la ruta relativa del archivo para usar como la ruta de salida del archivo minificado, y la crea.
 rel_path=${file#./}
 min_path="minified/$rel_path"
+  mkdir -p $(dirname "$min_path")
 ```
 
 ### Archivos HTML
