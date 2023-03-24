@@ -64,7 +64,7 @@ find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' 
   # Verifica si el archivo es un archivo HTML, CSS o JS
   case "$file" in
     *.html)
-      # Minifica el archivo HTML y guarda el archivo minificado en el directorio minified
+      # Minifica el archivo HTML y guarda el archivo minificado en el directorio "minified"
       ./node_modules/.bin/html-minifier "$file" -o "$min_path" --collapse-whitespace --remove-comments
     ;;
     *.css)
@@ -72,7 +72,6 @@ find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' 
       ./node_modules/.bin/cleancss "$file" -o "$min_path" --compatibility "ie >= 11, Edge >= 12, Firefox >= 2, Chrome >= 4, Safari >= 3.1, Opera >= 15, iOS >= 3.2"
     ;;
     *.js)
-      mkdir -p $(dirname "$min_path")
       # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
       ./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle
     ;;

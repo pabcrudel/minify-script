@@ -31,7 +31,6 @@ do
   else
     echo "$package ya está instalado."
   fi
-  echo
 done
 ```
 
@@ -41,10 +40,16 @@ El script crea un directorio llamado "minified" para guardar los archivos minifi
 
 ```sh
 # Verifica si el directorio "minified" existe, si es asi elimina su contenido, y si no crea el directorio.
-if [ ! -d minified ]; then
-    mkdir -p minified
+if [ ! -d $dir ]; then
+  echo "No exite."
+  echo "Creando directorio $dir..."
+  mkdir -p $dir
+elif [ ! -z "$(ls -A $dir)" ]; then
+  echo "No esta vacio."
+  echo "Limpiando el contenido del directorio $dir..."
+  rm -r $dir/*
 else
-    rm -r minified/*
+  echo "$dir esta vacio."
 fi
 ```
 
@@ -92,10 +97,6 @@ Si se encuentra un archivo JS, se utiliza el paquete *uglify-js* para minimizar 
 # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
 ./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle
 ```
-
-## Finalización del proceso de minificación
-
-Una vez que se han comprimido todos los archivos, el script muestra un mensaje indicando que el proceso ha finalizado.
 
 ## Ejecución del script
 
