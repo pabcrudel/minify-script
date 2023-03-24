@@ -96,10 +96,6 @@ Si se encuentra un archivo JS, se utiliza el paquete *uglify-js* para minimizar 
 
 Una vez que se han comprimido todos los archivos, el script muestra un mensaje indicando que el proceso ha finalizado.
 
-```sh
-
-```
-
 ## Ejecución del script
 
 Para ejecutar el script, abre una terminal en el directorio raíz del proyecto y ejecuta el siguiente comando:
