@@ -41,6 +41,9 @@ find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' 
   min_path="minified/$rel_path"
   mkdir -p $(dirname "$min_path")
 
+  # Muestra que archivo se esta minificando
+  echo "Minificando el archivo $file..."
+
   # Verifica si el archivo es un archivo HTML, CSS o JS
   case "$file" in
     *.html)
