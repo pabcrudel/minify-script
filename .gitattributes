@@ -1,3 +1,7 @@
 # Text files
 *.md text
 *.sh text
+*.html text
+*.css text
+*.js text
+*.json text
