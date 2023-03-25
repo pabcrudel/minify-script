@@ -97,7 +97,7 @@ f_minify() {
       ;;
       *.js)
         # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
-        f_catch_error './node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle'
+        f_catch_error './node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress drop_console --mangle --mangle-props'
       ;;
     esac
 

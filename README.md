@@ -91,11 +91,11 @@ Si se encuentra un archivo CSS, se utiliza el paquete *clean-css-cli* para minim
 
 ### Archivos JS
 
-Si se encuentra un archivo JS, se utiliza el paquete *uglify-js* para minimizar el archivo. Los parámetros `--compress` y `--mangle` se utilizan para comprimir y ofuscar el código del archivo.
+Si se encuentra un archivo JS, se utiliza el paquete *uglify-js* para minimizar el archivo. Los parámetros `--compress drop_console` y `--mangle --mangle-props` se utilizan para comprimir, quitar comentarios y console.*, y ofuscar el código del archivo.
 
 ```sh
 # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
-./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress --mangle
+./node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress drop_console --mangle --mangle-props
 ```
 
 ## Ejecución del script
