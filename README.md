@@ -59,7 +59,7 @@ El script utiliza el comando `find` para encontrar todos los archivos HTML, CSS 
 
 ```sh
 # Itera a través de los archivos HTML, CSS y JS en el directorio actual y sus subdirectorios, excluyendo la carpeta "node_modules"
-find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \)
+find . -type f -not -path "*node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \)
 ```
 
 Guarda la ubicacion del archivo original para almacenar el archivo minificado respetando el arbol de directorios original.
