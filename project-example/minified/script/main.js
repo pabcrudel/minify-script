@@ -1,0 +1,1 @@
+document.getElementById("myText").innerHTML="Texto procedente de JavaScript";

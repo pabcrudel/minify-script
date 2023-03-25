@@ -1,0 +1,16 @@
+/* Diseño para el cuerpo */
+body {
+    margin: 0;
+    padding: 0 1rem;
+    background-color: antiquewhite;
+}
+
+/* Diseño para el titulo */
+h1 {
+    color: red;
+}
+
+/* Diseño para el parrafo */
+p {
+    color: brown;
+}
