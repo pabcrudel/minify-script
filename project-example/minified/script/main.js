@@ -1,1 +1,1 @@
-document.getElementById("myText").innerHTML="Texto procedente de JavaScript";
+const asdf=4,msg="Texto procedente de JavaScript";document.getElementById("myTeexamplet").innerHTML=msg;var example={o:0,t:1,m:function(){return this.t+this.o},i:2,o:3},o={p:1,_:3};o.p+=o._;
