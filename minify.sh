@@ -101,7 +101,7 @@ f_minify() {
       ;;
     esac
 
-  done < <(find . -type f -not -path "./node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -print0)
+  done < <(find . -type f -not -path "*node_modules/*" \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -print0)
 
   echo
   if [ $isOk -eq 0 ]; then
