@@ -57,20 +57,22 @@ f_check_output() {
 }
 
 f_minify() {
+  # Variable de control de errores.
+  isOk=0
+
+  # Captura el error del proceso de minificado y actualiza la variable de control de errores.
   f_catch_error() {
     minify_error_message=$(eval $1 2>&1)
     isOk=$?
   }
 
+  # Muestra un final de mensaje diferente si el proceso de minificado ha sido completado o interrumpido.
   f_final_message() {
     echo "¡Proceso de minificación $1!"
   }
 
   echo "¡Proceso de minificación iniciado!"
   echo
-
-  # Variable de control de errores.
-  isOk=0
 
   # Itera a través de los archivos HTML, CSS y JS en el directorio actual y sus subdirectorios, excluyendo la carpeta "node_modules"
   # Si algun archivo no se puede minificar el proceso sera interrumpido.
