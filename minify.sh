@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Script que minifica los archivos .html, .css y .js y los añade en una carpeta con el nombre de "minified" respetando el arbol de directorios original.
+# Script que minifica los archivos .html, .css y .js y los añade en una carpeta 
+# con el nombre de "minified" respetando el arbol de directorios original.
 #
 # --------------------------------------------------------------------
 # Author: Pablo Cru
@@ -15,7 +16,7 @@ f_check_packages() {
   echo Verificando instalacion de paquetes necesarios...
   echo
   # Lista de paquetes a verificar e instalar
-  packages=("uglify-js" "clean-css-cli" "html-minifier")
+  packages=("terser" "clean-css-cli" "html-minifier")
 
   # Iterar sobre la lista de paquetes
   for package in "${packages[@]}"
@@ -97,7 +98,7 @@ f_minify() {
       ;;
       *.js)
         # Minifica el archivo JS y guarda el archivo minificado en el directorio "minified"
-        f_catch_error './node_modules/.bin/uglifyjs "$file" -o "$min_path" --compress drop_console --mangle --mangle-props'
+        f_catch_error './node_modules/.bin/terser "$file" -o "$min_path" --compress drop_console --mangle --mangle-props'
       ;;
     esac
 
